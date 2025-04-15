@@ -90,6 +90,5 @@ for i, layer in enumerate(layers[:n_half]):
     feature_dim = np.prod(output_shape)
     print(f"Feature dimension: {feature_dim}")
 
-    if feature_dim <100:
-        PCA(feature_dim, batch_size, x_train, encoder, y_train, output_shape, selected_labels)
-        TSNE(feature_dim, batch_size, x_train, encoder, y_train, output_shape, selected_labels)
+    PCA(feature_dim, batch_size, x_train, encoder, y_train, output_shape, selected_labels)
+    TSNE(feature_dim, batch_size, x_train, encoder, y_train, output_shape, selected_labels)
