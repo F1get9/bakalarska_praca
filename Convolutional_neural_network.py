@@ -2,9 +2,6 @@ from tensorflow.keras.datasets import mnist
 import numpy as np
 from tensorflow.keras.layers import Input, Dense, Conv2D, MaxPooling2D, UpSampling2D, Flatten, Reshape, InputLayer
 from tensorflow.keras.models import Model
-import tensorflow as tf
-import cv2
-from openTSNE import TSNE as OpenTSNE
 from visualization import PCA, TSNE
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -89,6 +86,5 @@ for i, layer in enumerate(layers[:n_half]):
     output_shape = encoder.output_shape[1:]
     feature_dim = np.prod(output_shape)
     print(f"Feature dimension: {feature_dim}")
-
     PCA(feature_dim, batch_size, x_train, encoder, y_train, output_shape, selected_labels)
     TSNE(feature_dim, batch_size, x_train, encoder, y_train, output_shape, selected_labels)
