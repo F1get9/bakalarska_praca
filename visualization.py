@@ -1,3 +1,12 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+import tensorflow as tf
+import cv2
+import numpy as np
+from openTSNE import TSNE as OpenTSNE
+
 colors = { 0 : (0,0,255), 1 : (0,255,255), 2 : (0,255,0), 3 : (255,255,0), 4 : (255,255,255), 5: (160,160,160), 6: (255,0,0), 7: (255,0,255), 8: (80,80,0), 9 : (80,0,0) }
 
 def display(points, types, numbers):
@@ -14,7 +23,7 @@ def display(points, types, numbers):
     
     return graph
 
-def PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, numbers):
+def PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labels):
     y_codes = []
 
     for i in range(0, len(x_train), batch_size):
@@ -34,7 +43,7 @@ def PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, numbers):
     points = tf.matmul(y_centered, top_components)
     points_np = points.numpy()
 
-    graph = display(points_np, y_train, numbers)
+    graph = display(points_np, y_train, selected_labels)
     label_str = "_".join(str(lbl) for lbl in selected_labels)
     filename = f"latent-space_{label_str}_{feature_dim}.png"
     cv2.imwrite(filename, graph)
@@ -51,8 +60,8 @@ def TSNE(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_lab
 
     y_codes = np.concatenate(y_codes, axis=0)
 
-    tsne = OpenTSNE(perplexity=30, random_state=42)  # openTSNE uses different args
-    points_np = tsne.fit(y_codes)  # Using fit() instead of fit_transform()
+    tsne = OpenTSNE(perplexity=30, random_state=42) 
+    points_np = tsne.fit(y_codes)  
 
     graph = display(points_np, y_train, selected_labels)
     label_str = "_".join(str(lbl) for lbl in selected_labels)
