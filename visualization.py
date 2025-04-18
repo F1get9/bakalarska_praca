@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
 import tensorflow as tf
 import cv2
 import numpy as np
@@ -64,8 +60,27 @@ def TSNE(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_lab
     points_np = tsne.fit(y_codes)  
 
     graph = display(points_np, y_train, selected_labels)
-    label_str = "_".join(str(lbl) for lbl in selected_labels)
+    label_str = ",".join(str(lbl) for lbl in selected_labels)
     filename = f"latent-space_tsne_{label_str}_{feature_dim}.png"
     cv2.imwrite(filename, graph)
 
     print(f"t-SNE visualization saved to {filename}")
+
+def MEAN(feature_dim, batch_size, x_train, encoder_model, y_train, shape, selected_labels):
+    y_codes = []
+    for i in range(0, len(x_train), batch_size):
+        a, b = i, min(len(x_train), i + batch_size)
+        input_images = x_train[a:b]
+        encoded_output = encoder_model.predict(input_images)  
+        mean = encoded_output  
+        mean = mean[:, :2]  
+        y_codes.append(mean)  
+    y_codes = np.concatenate(y_codes, axis=0) 
+    shape = y_codes.shape[1]
+    if y_codes.shape[1] != 2:
+        raise ValueError(f"Expected (n_samples, 2), but got {y_codes.shape}")
+    graph = display(y_codes, y_train, selected_labels)
+    label_str = ",".join(str(lbl) for lbl in selected_labels)
+    filename = f"latent-space_tsne_{label_str}_{feature_dim}.png"
+    cv2.imwrite(f'latent-space_MEAN_{label_str}_{shape}.png', graph)
+    print(f"Mean visualization saved to {filename}")
