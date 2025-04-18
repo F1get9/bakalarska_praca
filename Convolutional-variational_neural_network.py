@@ -155,11 +155,11 @@ for epoch in range(1, epochs + 1):
     acc  = accuracy_metric.result()
     print(f'Epoch: {epoch}, Test set ELBO: {elbo:.4f}, '
           f'Time: {(end_time - start_time):.2f}s, Accuracy: {acc:.4f}')
-    #if epoch % 10 == 0:
-    ckpt_dir = os.path.join(CHECKPOINT_ROOT, f'epoch_{epoch}')
-    os.makedirs(ckpt_dir, exist_ok=True)
-    save_path = checkpoint.save(file_prefix=os.path.join(ckpt_dir, 'ckpt'))
-    print(f'→ Saved checkpoint for epoch {epoch}: {save_path}')
+    if epoch % 10 == 0:
+      ckpt_dir = os.path.join(CHECKPOINT_ROOT, f'epoch_{epoch}')
+      os.makedirs(ckpt_dir, exist_ok=True)
+      save_path = checkpoint.save(file_prefix=os.path.join(ckpt_dir, 'ckpt'))
+      print(f'→ Saved checkpoint for epoch {epoch}: {save_path}')
 
 batch_size = 512
 y_codes = np.zeros((len(train_images),2),np.float32)    
