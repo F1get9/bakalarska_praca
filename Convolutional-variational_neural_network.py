@@ -21,6 +21,7 @@ train_size = 60000
 batch_size = 32
 test_size = 10000
 
+# Use *tf.data* to batch and shuffle the data
 train_dataset = (tf.data.Dataset.from_tensor_slices(train_images).shuffle(train_size).batch(batch_size))
 test_dataset = (tf.data.Dataset.from_tensor_slices(test_images).shuffle(test_size).batch(batch_size))
 
@@ -156,11 +157,10 @@ for epoch in range(1, epochs + 1):
     print(f'Epoch: {epoch}, Test set ELBO: {elbo:.4f}, '
           f'Time: {(end_time - start_time):.2f}s, Accuracy: {acc:.4f}')
     if epoch % 10 == 0:
-      ckpt_dir = os.path.join(CHECKPOINT_ROOT, f'epoch_{epoch}')
-      os.makedirs(ckpt_dir, exist_ok=True)
-      save_path = checkpoint.save(file_prefix=os.path.join(ckpt_dir, 'ckpt'))
-      print(f'→ Saved checkpoint for epoch {epoch}: {save_path}')
-
+        ckpt_dir = os.path.join(CHECKPOINT_ROOT, f'epoch_{epoch}')
+        os.makedirs(ckpt_dir, exist_ok=True)
+        save_path = checkpoint.save(file_prefix=os.path.join(ckpt_dir, 'ckpt'))
+        print(f'→ Saved checkpoint for epoch {epoch}: {save_path}')
 batch_size = 512
 y_codes = np.zeros((len(train_images),2),np.float32)    
 for i in range(0,len(train_images),batch_size):
@@ -170,7 +170,7 @@ for i in range(0,len(train_images),batch_size):
     y_codes[a:b] = output_codes[:,:2]
 
 points = y_codes
-graph = display(points,train_categories, range(10))
+graph = display(points,train_categories,range(10))
 cv2.imwrite('latent-space-conv_var_ae.png',graph)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
