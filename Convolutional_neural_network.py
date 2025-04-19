@@ -86,5 +86,6 @@ for i, layer in enumerate(layers[:n_half]):
     output_shape = encoder.output_shape[1:]
     feature_dim = np.prod(output_shape)
     print(f"Feature dimension: {feature_dim}")
-    PCA(feature_dim, batch_size, x_train, encoder, y_train, output_shape, selected_labels)
-    TSNE(feature_dim, batch_size, x_train, encoder, y_train, output_shape, selected_labels)
+    type_of_network = "Convolutional"
+    PCA(feature_dim, batch_size, x_train, encoder, y_train, output_shape, selected_labels, type_of_network)
+    TSNE(feature_dim, batch_size, x_train, encoder, y_train, output_shape, selected_labels, type_of_network)
