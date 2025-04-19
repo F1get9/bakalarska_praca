@@ -101,7 +101,7 @@ class CVAE(tf.keras.Model):
         x_logit = self.decode(z, apply_sigmoid=False)
         return x_logit, mean, logvar
 
-  optimizer = tf.keras.optimizers.Adam(1e-4)
+optimizer = tf.keras.optimizers.Adam(1e-4)
 
 def log_normal_pdf(sample, mean, logvar, raxis=1):
     log2pi = tf.math.log(2. * np.pi)
