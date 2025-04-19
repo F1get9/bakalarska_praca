@@ -170,7 +170,7 @@ for i in range(0,len(train_images),batch_size):
     y_codes[a:b] = output_codes[:,:2]
 
 points = y_codes
-graph = display(points,train_categories,range(10))
+graph = display(points,train_categories,range(10), True)
 cv2.imwrite('latent-space-conv_var_ae.png',graph)
 
 encoder_input = Input(shape=(28, 28, 1), dtype=tf.float32)
