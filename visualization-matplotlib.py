@@ -1,3 +1,7 @@
+import matplotlib.pyplot as plt
+from openTSNE import TSNE as OpenTSNE
+import numpy as np
+
 def TSNE(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labels):
     y_codes = []
     for i in range(0, len(x_train), batch_size):
