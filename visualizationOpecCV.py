@@ -42,8 +42,8 @@ def PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labe
     points_np = points.numpy()
 
     graph = display(points_np, y_train, selected_labels, False)
-    label_str = "_".join(str(lbl) for lbl in selected_labels)
-    filename = f"latent-space_{label_str}_{feature_dim}_{type_of_network}.png"
+    label_str = ",".join(str(lbl) for lbl in selected_labels)
+    filename = f"latent-space_PCA_{label_str}_{feature_dim}_{type_of_network}.png"
     cv2.imwrite(filename, graph)
     print(f"Saved PCA visualization to {filename}")
 
