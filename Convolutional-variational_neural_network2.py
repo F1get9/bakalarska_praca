@@ -177,9 +177,8 @@ for idx, layer in enumerate(model.encoder_shared.layers):
     output_shape = layer_model.output_shape[1:]
     feature_dim = np.prod(layer_model.output_shape[1:])
     print(f"Feature Dimension: {feature_dim}")
-    if feature_dim < 500:
-        PCA(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels)
-        TSNE(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels)
+    PCA(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels)
+    TSNE(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels)
 
 print("\n--- Encoder Mean Branch Layers ---")
 for idx, layer in enumerate(model.encoder_mean.layers):
