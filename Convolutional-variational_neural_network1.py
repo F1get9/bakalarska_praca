@@ -3,7 +3,7 @@ import numpy as np
 import time
 from IPython import display
 import cv2
-from visualization-OpenCV import display, PCA, TSNE, MEAN
+from visualizationOpenCV import display, PCA, TSNE, MEAN
 from tensorflow.keras.layers import Input
 from tensorflow.keras.models import Model
 import os
