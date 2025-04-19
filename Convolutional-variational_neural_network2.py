@@ -160,7 +160,7 @@ for epoch in range(1, epochs + 1):
         save_path = checkpoint.save(file_prefix=os.path.join(ckpt_dir, 'ckpt'))
         print(f'→ Saved checkpoint for epoch {epoch}: {save_path}')
 
-  encoder_input = Input(shape=(28, 28, 1), dtype=tf.float32)
+encoder_input = Input(shape=(28, 28, 1), dtype=tf.float32)
 x = encoder_input
 batch_size = 64
 numbers_input = input("Enter labels (space-separated): ")
