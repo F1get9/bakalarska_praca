@@ -21,7 +21,7 @@ def display(points,types, numbers, normal_distribution):
         cv2.putText(graph,str(j),(j*32+8,32-8),0,0.9,(0,0,0))
     return graph
 
-def PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labels):
+def PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labels, type_of_network):
     y_codes = []
 
     for i in range(0, len(x_train), batch_size):
@@ -43,11 +43,11 @@ def PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labe
 
     graph = display(points_np, y_train, selected_labels, False)
     label_str = "_".join(str(lbl) for lbl in selected_labels)
-    filename = f"latent-space_{label_str}_{feature_dim}.png"
+    filename = f"latent-space_{label_str}_{feature_dim}_{type_of_network}.png"
     cv2.imwrite(filename, graph)
     print(f"Saved PCA visualization to {filename}")
 
-def TSNE(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labels):
+def TSNE(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labels, type_of_network):
     y_codes = []
 
     for i in range(0, len(x_train), batch_size):
@@ -63,12 +63,12 @@ def TSNE(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_lab
 
     graph = display(points_np, y_train, selected_labels, False)
     label_str = ",".join(str(lbl) for lbl in selected_labels)
-    filename = f"latent-space_tsne_{label_str}_{feature_dim}.png"
+    filename = f"latent-space_tsne_{label_str}_{feature_dim}_{type_of_network}.png"
     cv2.imwrite(filename, graph)
 
     print(f"t-SNE visualization saved to {filename}")
 
-def MEAN(feature_dim, batch_size, x_train, encoder_model, y_train, shape, selected_labels):
+def MEAN(feature_dim, batch_size, x_train, encoder_model, y_train, shape, selected_labels, type_of_network):
     y_codes = []
     for i in range(0, len(x_train), batch_size):
         a, b = i, min(len(x_train), i + batch_size)
@@ -84,5 +84,5 @@ def MEAN(feature_dim, batch_size, x_train, encoder_model, y_train, shape, select
     graph = display(y_codes, y_train, selected_labels, True)
     label_str = ",".join(str(lbl) for lbl in selected_labels)
     filename = f"latent-space_tsne_{label_str}_{feature_dim}.png"
-    cv2.imwrite(f'latent-space_MEAN_{label_str}_{shape}.png', graph)
+    cv2.imwrite(f'latent-space_MEAN_{label_str}_{shape}_{type_of_network}.png', graph)
     print(f"Mean visualization saved to {filename}")
