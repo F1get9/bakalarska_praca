@@ -31,8 +31,6 @@ def TSNE(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_lab
     label_str = ",".join(str(lbl) for lbl in selected_labels)
     plt.title(f'TSNE visualization for labels [{label_str}] (feat_dim={feature_dim})')
     plt.tight_layout()
-
-    # 6. Save figure
     save_dir = "tsne_plots"
     os.makedirs(save_dir, exist_ok=True)
     label_str = ",".join(str(lbl) for lbl in selected_labels)
