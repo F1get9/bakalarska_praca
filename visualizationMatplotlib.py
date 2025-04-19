@@ -107,7 +107,7 @@ def MEAN(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_lab
     label_str = ",".join(str(lbl) for lbl in selected_labels)
     plt.title(f'MEAN visualization for labels [{label_str}] (feat_dim={feature_dim})')
     plt.tight_layout()
-    save_dir = "pca_plots"
+    save_dir = "mean_plots"
     os.makedirs(save_dir, exist_ok=True)
     label_str = ",".join(str(lbl) for lbl in selected_labels)
     filename = os.path.join(save_dir, f'latent-space_mean_{shape[0]}_{label_str}.png')
