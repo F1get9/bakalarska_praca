@@ -134,7 +134,7 @@ latent_dim = 2
 num_examples_to_generate = 16
 model = CVAE(latent_dim)
 
-CHECKPOINT_ROOT = 'checkpoints'
+CHECKPOINT_ROOT = 'checkpoints-var'
 checkpoint = tf.train.Checkpoint(model=model, optimizer=optimizer)
 
 for epoch in range(1, epochs + 1):
