@@ -194,5 +194,8 @@ for idx, layer in enumerate(model.encoder.layers):
     print(f"Feature Dimension: {feature_dim}")
     if feature_dim == 4:
         MEAN(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels)
+    type_of_network = "Convolutional-variational"
+    PCA(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels, type_of_network)
+    TSNE(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels, type_of_network)
     PCA(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels)
     TSNE(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels)
