@@ -182,6 +182,7 @@ print("Selected labels:", selected_labels)
 train_mask = np.isin(train_categories, selected_labels)
 train_images = train_images[train_mask]
 train_categories = train_categories[train_mask]
+flatten_layer_dim = 4
 for idx, layer in enumerate(model.encoder.layers):
     x = layer(x)
     layer_model = Model(encoder_input, x)
@@ -191,7 +192,7 @@ for idx, layer in enumerate(model.encoder.layers):
     feature_dim = np.prod(layer_model.output_shape[1:])
     print(f"Feature Dimension: {feature_dim}")
     type_of_network = "Convolutional-variational"
-    if feature_dim == 4:
-        MEAN(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels, type_of_network)
+    if feature_dim == flatten_layer_dim:
+        MEAN_PCA(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels, type_of_network)
     PCA(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels, type_of_network)
     TSNE(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels, type_of_network)
