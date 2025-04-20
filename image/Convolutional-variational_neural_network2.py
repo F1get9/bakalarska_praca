@@ -190,4 +190,4 @@ for idx, layer in enumerate(model.encoder_mean.layers):
     feature_dim = np.prod(layer_model.output_shape[1:])
     print(f"Feature Dimension: {feature_dim}")
     if feature_dim == 2:
-        MEAN(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels)
+        MEAN_PCA(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels)
