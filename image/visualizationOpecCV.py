@@ -68,7 +68,7 @@ def TSNE(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_lab
 
     print(f"t-SNE visualization saved to {filename}")
 
-def MEAN(feature_dim, batch_size, x_train, encoder_model, y_train, shape, selected_labels, type_of_network):
+def MEAN_PCA(feature_dim, batch_size, x_train, encoder_model, y_train, shape, selected_labels, type_of_network):
     y_codes = []
     for i in range(0, len(x_train), batch_size):
         a, b = i, min(len(x_train), i + batch_size)
