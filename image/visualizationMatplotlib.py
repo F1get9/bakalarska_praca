@@ -50,7 +50,7 @@ def MEAN_PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, selected
     points_np = np.concatenate(y_codes, axis=0).astype(np.float32)
     display_and_save(points_np, y_train, selected_labels, "MEAN_PCA")
 
-def display_and_save(poinst_np, y_train, selected_labels, name_of_reduction_algorithm) 
+def display_and_save(poinst_np, y_train, selected_labels, name_of_reduction_algorithm):
     plt.figure(figsize=(10, 8))
     cmap = plt.cm.tab10
     labels = np.unique(y_train)
