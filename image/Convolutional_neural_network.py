@@ -2,7 +2,7 @@ from tensorflow.keras.datasets import mnist
 import numpy as np
 from tensorflow.keras.layers import Input, Dense, Conv2D, MaxPooling2D, UpSampling2D, Flatten, Reshape, InputLayer
 from tensorflow.keras.models import Model
-from visualization-OpenCV import PCA, TSNE
+from visualizationOpenCV import PCA, TSNE
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
