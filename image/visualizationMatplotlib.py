@@ -36,7 +36,7 @@ def PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labe
     display_and_save(points_np, y_train, selected_labels, "PCA", feature_dim, shape)
 
 
-def MEAN_PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labels):
+def MEAN(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labels):
     y_codes = []
     for i in range(0, len(x_train), batch_size):
         a, b = i, min(len(x_train), i + batch_size)
@@ -48,7 +48,7 @@ def MEAN_PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, selected
             mean_code = output_codes
         y_codes.append(mean_code[:, :2].reshape(len(input_images), -1))
     points_np = np.concatenate(y_codes, axis=0).astype(np.float32)
-    display_and_save(points_np, y_train, selected_labels, "MEAN_PCA", feature_dim, shape)
+    display_and_save(points_np, y_train, selected_labels, "MEAN", feature_dim, shape)
 
 def display_and_save(points_np, y_train, selected_labels, name_of_reduction_algorithm, feature_dim, shape):
     plt.figure(figsize=(10, 8))
