@@ -4,7 +4,7 @@ import time
 import os
 from tensorflow.keras.layers import Input
 from tensorflow.keras.models import Model
-from visualizationMatplotlib import PCA, MEAN_PCA, TSNE
+from visualizationMatplotlib import PCA, MEAN, TSNE
 
 (train_images, train_categories), (test_images, test_categories) = tf.keras.datasets.mnist.load_data()
 def preprocess_images(images):
@@ -191,4 +191,4 @@ for idx, layer in enumerate(model.encoder_mean.layers):
     feature_dim = np.prod(layer_model.output_shape[1:])
     print(f"Feature Dimension: {feature_dim}")
     if feature_dim == flatten_layer_dim:
-        MEAN_PCA(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels)
+        MEAN(feature_dim, batch_size, train_images, layer_model, train_categories, output_shape, selected_labels)
