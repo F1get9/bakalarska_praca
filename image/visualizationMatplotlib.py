@@ -70,7 +70,7 @@ def display_and_save(points_np, y_train, selected_labels, name_of_reduction_algo
     save_dir = f"{name_of_reduction_algorithm}_plots"
     os.makedirs(save_dir, exist_ok=True)
     label_str = ",".join(str(lbl) for lbl in selected_labels)
-    filename = os.path.join(save_dir, f'latent-space_{name_of_reduction_algorithm}_{shape[0]}_{label_str}.png')
+    filename = os.path.join(save_dir, f'MCVAE_latent-space_{name_of_reduction_algorithm}_{shape[0]}_{label_str}.png')
     plt.savefig(filename, bbox_inches='tight')
     plt.close()
     print(f"{name_of_reduction_algorithm} visualization saved to {filename}")
