@@ -16,7 +16,7 @@ def TSNE(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_lab
     y_codes = np.concatenate(y_codes, axis=0)
     tsne = OpenTSNE(perplexity=30, random_state=42)
     points_np = tsne.fit(y_codes)
-    display_and_save(points_np, y_train, selected_labels, "TSNE", feature_dim)
+    display_and_save(points_np, y_train, selected_labels, "TSNE", feature_dim, shape)
 
 def PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labels):
     y_codes = []
@@ -33,7 +33,7 @@ def PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labe
     top_components = eigvecs[:, -2:]
     points = tf.matmul(y_centered, top_components)
     points_np = points.numpy()
-    display_and_save(points_np, y_train, selected_labels, "PCA", feature_dim)
+    display_and_save(points_np, y_train, selected_labels, "PCA", feature_dim, shape)
 
 
 def MEAN_PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, selected_labels):
@@ -48,9 +48,9 @@ def MEAN_PCA(feature_dim, batch_size, x_train, encoder, y_train, shape, selected
             mean_code = output_codes
         y_codes.append(mean_code[:, :2].reshape(len(input_images), -1))
     points_np = np.concatenate(y_codes, axis=0).astype(np.float32)
-    display_and_save(points_np, y_train, selected_labels, "MEAN_PCA", feature_dim)
+    display_and_save(points_np, y_train, selected_labels, "MEAN_PCA", feature_dim, shape)
 
-def display_and_save(points_np, y_train, selected_labels, name_of_reduction_algorithm, feature_dim):
+def display_and_save(points_np, y_train, selected_labels, name_of_reduction_algorithm, feature_dim, shape):
     plt.figure(figsize=(10, 8))
     cmap = plt.cm.tab10
     labels = np.unique(y_train)
@@ -70,7 +70,7 @@ def display_and_save(points_np, y_train, selected_labels, name_of_reduction_algo
     save_dir = f"{name_of_reduction_algorithm}_plots"
     os.makedirs(save_dir, exist_ok=True)
     label_str = ",".join(str(lbl) for lbl in selected_labels)
-    filename = os.path.join(save_dir, f'latent-space_{name_of_reduction_algorithm}_{shape[0]}x{shape[1]}_{label_str}.png')
+    filename = os.path.join(save_dir, f'latent-space_{name_of_reduction_algorithm}_{shape[0]}_{label_str}.png')
     plt.savefig(filename, bbox_inches='tight')
     plt.close()
     print(f"{name_of_reduction_algorithm} visualization saved to {filename}")
