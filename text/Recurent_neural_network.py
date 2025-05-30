@@ -105,7 +105,7 @@ def make_video_lstm(history, filename, title):
 
 make_video_lstm(history_lstm_embed, 'paraphrase_lstm.avi', 'LSTM Output')
 
-def make_video_words(history, filename):
+def make_video_words(history, filename, range_for_visualization):
     out = cv2.VideoWriter()
     out.open(filename, cv2.VideoWriter_fourcc('M','J','P','G'), 10, (1600,800))
     colors = [(0,0,255),(0,255,0),(255,255,0),(0,255,255)]
@@ -116,11 +116,13 @@ def make_video_words(history, filename):
         _ = cv2.putText(disp, f'epoch: {codes[1]}', (1200, 200), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (200, 200, 200), 3)
         for code, word, color in zip(codes[0], watched_words, colors):
             x, y = code
-            xx, yy = int(x*200+800), 799-int(y*200+400)
+            xx, yy = int(x*range_for_visualization+800), 799-int(y*range_for_visualization+400)
             _ = cv2.circle(disp, (xx,yy), 5, color, cv2.FILLED)
             _ = cv2.putText(disp, word, (xx+5,yy-5), 0, 1.0, color, 2)
         out.write(disp)
     out.release()
-
-make_video_words(history_input_embed, 'embedding_input.avi')
-make_video_words(history_output_embed, 'embedding_output.avi')
+    
+range_for_embedding = 200
+make_video_words(history_input_embed, 'embedding_input.avi', range_for_embedding)
+range_for_dense = 700
+make_video_words(history_output_embed, 'embedding_output.avi', range_for_dense)
