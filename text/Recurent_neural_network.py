@@ -124,5 +124,5 @@ def make_video_words(history, filename, range_for_visualization):
     
 range_for_embedding = 200
 make_video_words(history_input_embed, 'embedding_input.avi', range_for_embedding)
-range_for_dense = 700
+range_for_dense = 500
 make_video_words(history_output_embed, 'embedding_output.avi', range_for_dense)
