@@ -48,7 +48,7 @@ x = UpSampling2D((2, 2))(x)  # (8x8) → (16x16)
 x = Conv2D(16, (3, 3), activation='relu')(x)
 x = UpSampling2D((2, 2))(x)  # (16x16) → (32x32)
 
-
+x = tf.keras.layers.Cropping2D(((2,2),(2,2)))(x)  # (32x32) → (28x28)
 x = Conv2D(1, (3, 3), activation='sigmoid', padding='same')(x)
 
 out = x
