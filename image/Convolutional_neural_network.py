@@ -66,7 +66,7 @@ print('Test accuracy:', scores[1])
 orig_input = Input(shape=(28, 28, 1), dtype='float32')
 x = orig_input
 layers = [layer for layer in autoencoder.layers if not isinstance(layer, InputLayer)]
-n_half = len(layers) // 2  # Use first half of layers as encoder
+n_half = len(layers) // 2
 batch_size = 64  
 numbers_input = input("Enter labels (space-separated): ")
 selected_labels = [int(n) for n in numbers_input.strip().split() if n.isdigit()]
@@ -82,7 +82,6 @@ for i, layer in enumerate(layers[:n_half]):
     x = layer(x)
     encoder = Model(orig_input, x)
     encoder.summary()
-
     output_shape = encoder.output_shape[1:]
     feature_dim = np.prod(output_shape)
     print(f"Feature dimension: {feature_dim}")
