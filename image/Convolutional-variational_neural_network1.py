@@ -21,7 +21,6 @@ train_size = 60000
 batch_size = 32
 test_size = 10000
 
-# Use *tf.data* to batch and shuffle the data
 train_dataset = (tf.data.Dataset.from_tensor_slices(train_images).shuffle(train_size).batch(batch_size))
 test_dataset = (tf.data.Dataset.from_tensor_slices(test_images).shuffle(test_size).batch(batch_size))
 
@@ -50,7 +49,6 @@ class CVAE(tf.keras.Model):
             tf.keras.layers.Conv2D(kernel_initializer=self.initializer,
                 filters=64, kernel_size=3, strides=(1, 1), activation='relu',padding='same'),
             tf.keras.layers.Flatten(),
-            # No activation
             tf.keras.layers.Dense(latent_dim + latent_dim,kernel_initializer=self.initializer,),
         ]
     )
@@ -74,7 +72,6 @@ class CVAE(tf.keras.Model):
                 filters=32, kernel_size=3, strides=2, padding='same',
                 activation='relu'),
             tf.keras.layers.BatchNormalization(),
-            # No activation
             tf.keras.layers.Conv2DTranspose(kernel_initializer=self.initializer,
                 filters=1, kernel_size=3, strides=1, padding='same',
                 activation='relu'),
